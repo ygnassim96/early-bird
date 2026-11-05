@@ -16,6 +16,10 @@ concurrency:
   group: data-branch
   cancel-in-progress: false
 
+env:
+  PYTHONUNBUFFERED: "1"          # print log lines as they happen
+  MAX_ENRICH_PER_RUN: "150"      # tag at most 150 articles per run
+
 jobs:
   collect:
     runs-on: ubuntu-latest
@@ -32,11 +36,14 @@ jobs:
       - name: Collect feeds
         run: python -m collector.collect ${{ inputs.force && '--force' || '' }}
       - name: Fetch text and tag with Gemini
+        timeout-minutes: 25          # stop early so progress still gets published
+        continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
         run: python -m collector.enrich
       - name: Publish data branch
+        if: always()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash scripts/publish_data.sh
