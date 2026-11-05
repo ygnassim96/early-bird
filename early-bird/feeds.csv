@@ -1,0 +1,158 @@
+category,outlet,feed,url,poll_tier,volume,confidence,notes
+1 Wires & aggregators,Reuters (via Google News),site search last 24h,https://news.google.com/rss/search?q=site:reuters.com+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,Reuters has no public RSS. Google News returns up to ~100 items
+1 Wires & aggregators,Reuters (via Google News),world last 24h,https://news.google.com/rss/search?q=site:reuters.com/world+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,
+1 Wires & aggregators,Reuters (via Google News),business last 24h,https://news.google.com/rss/search?q=site:reuters.com/business+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,
+1 Wires & aggregators,AP (via Google News),site search last 24h,https://news.google.com/rss/search?q=site:apnews.com+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,AP has no public RSS
+1 Wires & aggregators,AP (via Google News),world last 24h,https://news.google.com/rss/search?q=site:apnews.com/hub/world-news+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,guess,
+1 Wires & aggregators,AFP (via Google News),AFP mentions last 24h,https://news.google.com/rss/search?q=%22AFP%22+world+when:1d&hl=en-US&gl=US&ceid=US:en,2,med,guess,AFP has no public RSS. Loose match
+1 Wires & aggregators,Google News,World,https://news.google.com/rss/headlines/section/topic/WORLD?hl=en-US&gl=US&ceid=US:en,1,high,likely,
+1 Wires & aggregators,Google News,Nation,https://news.google.com/rss/headlines/section/topic/NATION?hl=en-US&gl=US&ceid=US:en,1,high,likely,
+1 Wires & aggregators,Google News,Business,https://news.google.com/rss/headlines/section/topic/BUSINESS?hl=en-US&gl=US&ceid=US:en,2,high,likely,
+1 Wires & aggregators,Bloomberg,Markets,https://feeds.bloomberg.com/markets/news.rss,1,high,likely,
+1 Wires & aggregators,Bloomberg,Politics,https://feeds.bloomberg.com/politics/news.rss,2,med,likely,
+1 Wires & aggregators,Bloomberg,Technology,https://feeds.bloomberg.com/technology/news.rss,2,med,likely,
+2 Global general,BBC,World,https://feeds.bbci.co.uk/news/world/rss.xml,1,high,likely,
+2 Global general,BBC,US & Canada,https://feeds.bbci.co.uk/news/world/us_and_canada/rss.xml,2,med,likely,
+2 Global general,BBC,Europe,https://feeds.bbci.co.uk/news/world/europe/rss.xml,2,med,likely,
+2 Global general,BBC,Middle East,https://feeds.bbci.co.uk/news/world/middle_east/rss.xml,2,med,likely,
+2 Global general,BBC,Asia,https://feeds.bbci.co.uk/news/world/asia/rss.xml,2,med,likely,
+2 Global general,BBC,Africa,https://feeds.bbci.co.uk/news/world/africa/rss.xml,2,med,likely,
+2 Global general,BBC,Latin America,https://feeds.bbci.co.uk/news/world/latin_america/rss.xml,3,low,likely,
+2 Global general,BBC,Business,https://feeds.bbci.co.uk/news/business/rss.xml,2,med,likely,
+2 Global general,BBC,Politics,https://feeds.bbci.co.uk/news/politics/rss.xml,2,med,likely,
+2 Global general,The Guardian,World,https://www.theguardian.com/world/rss,1,high,likely,
+2 Global general,The Guardian,US,https://www.theguardian.com/us-news/rss,2,med,likely,
+2 Global general,The Guardian,Middle East,https://www.theguardian.com/world/middleeast/rss,2,med,likely,
+2 Global general,The Guardian,Europe,https://www.theguardian.com/world/europe-news/rss,2,med,likely,
+2 Global general,The Guardian,Africa,https://www.theguardian.com/world/africa/rss,3,low,likely,
+2 Global general,The Guardian,Asia-Pacific,https://www.theguardian.com/world/asia-pacific/rss,2,med,likely,
+2 Global general,The Guardian,Americas,https://www.theguardian.com/world/americas/rss,3,low,likely,
+2 Global general,The Guardian,Business,https://www.theguardian.com/business/rss,2,med,likely,
+2 Global general,The Guardian,Politics,https://www.theguardian.com/politics/rss,2,med,likely,
+2 Global general,New York Times,World,https://rss.nytimes.com/services/xml/rss/nyt/World.xml,2,med,likely,
+2 Global general,New York Times,Africa,https://rss.nytimes.com/services/xml/rss/nyt/Africa.xml,3,low,likely,
+2 Global general,New York Times,Americas,https://rss.nytimes.com/services/xml/rss/nyt/Americas.xml,3,low,likely,
+2 Global general,New York Times,Asia Pacific,https://rss.nytimes.com/services/xml/rss/nyt/AsiaPacific.xml,3,low,likely,
+2 Global general,New York Times,Europe,https://rss.nytimes.com/services/xml/rss/nyt/Europe.xml,3,low,likely,
+2 Global general,New York Times,Middle East,https://rss.nytimes.com/services/xml/rss/nyt/MiddleEast.xml,3,low,likely,
+2 Global general,New York Times,Politics,https://rss.nytimes.com/services/xml/rss/nyt/Politics.xml,2,med,likely,
+2 Global general,New York Times,Business,https://rss.nytimes.com/services/xml/rss/nyt/Business.xml,2,med,likely,
+2 Global general,New York Times,Economy,https://rss.nytimes.com/services/xml/rss/nyt/Economy.xml,3,low,likely,
+2 Global general,New York Times,US,https://rss.nytimes.com/services/xml/rss/nyt/US.xml,2,med,likely,
+2 Global general,Washington Post,World,https://feeds.washingtonpost.com/rss/world,2,med,guess,WaPo has changed feeds before
+2 Global general,Washington Post,Politics,https://feeds.washingtonpost.com/rss/politics,2,med,guess,
+2 Global general,Wall Street Journal,World,https://feeds.content.dowjones.io/public/rss/RSSWorldNews,2,med,likely,Paywalled. Headlines and summary only
+2 Global general,Wall Street Journal,US Business,https://feeds.content.dowjones.io/public/rss/WSJcomUSBusiness,2,med,likely,Paywalled
+2 Global general,Wall Street Journal,Markets,https://feeds.content.dowjones.io/public/rss/RSSMarketsMain,2,med,likely,Paywalled
+2 Global general,Financial Times,World,https://www.ft.com/world?format=rss,2,med,likely,Paywalled. Headlines and summary only
+2 Global general,Financial Times,Companies,https://www.ft.com/companies?format=rss,2,med,likely,Paywalled
+2 Global general,Financial Times,Global Economy,https://www.ft.com/global-economy?format=rss,3,low,likely,Paywalled
+2 Global general,Financial Times,Markets,https://www.ft.com/markets?format=rss,2,med,likely,Paywalled
+2 Global general,The Economist,The world this week,https://www.economist.com/the-world-this-week/rss.xml,4,low,likely,Weekly
+2 Global general,The Economist,International,https://www.economist.com/international/rss.xml,3,low,likely,
+2 Global general,The Economist,Finance & economics,https://www.economist.com/finance-and-economics/rss.xml,3,low,likely,
+2 Global general,The Economist,Briefing,https://www.economist.com/briefing/rss.xml,4,low,likely,
+2 Global general,NPR,World,https://feeds.npr.org/1004/rss.xml,2,med,likely,
+2 Global general,NPR,News,https://feeds.npr.org/1001/rss.xml,2,med,likely,
+2 Global general,NPR,Politics,https://feeds.npr.org/1014/rss.xml,2,med,likely,
+2 Global general,NPR,Business,https://feeds.npr.org/1006/rss.xml,3,low,likely,
+2 Global general,Deutsche Welle,All English,https://rss.dw.com/rdf/rss-en-all,1,high,likely,
+2 Global general,Deutsche Welle,World,https://rss.dw.com/rdf/rss-en-world,2,med,likely,
+2 Global general,Deutsche Welle,Business,https://rss.dw.com/rdf/rss-en-bus,3,low,likely,
+2 Global general,France 24,All English,https://www.france24.com/en/rss,1,high,likely,
+2 Global general,France 24,Middle East,https://www.france24.com/en/middle-east/rss,2,med,likely,
+2 Global general,France 24,Europe,https://www.france24.com/en/europe/rss,2,med,likely,
+2 Global general,France 24,Africa,https://www.france24.com/en/africa/rss,2,med,likely,
+2 Global general,France 24,Asia-Pacific,https://www.france24.com/en/asia-pacific/rss,2,med,likely,
+2 Global general,France 24,Americas,https://www.france24.com/en/americas/rss,3,low,likely,
+3 US politics,Politico,Politics news,https://rss.politico.com/politics-news.xml,2,med,likely,
+3 US politics,Politico,Congress,https://rss.politico.com/congress.xml,2,med,likely,
+3 US politics,Axios,All,https://api.axios.com/feed/,1,high,likely,
+3 US politics,The Hill,All,https://thehill.com/feed/,1,high,likely,
+3 US politics,Semafor,All,https://www.semafor.com/rss.xml,3,low,guess,
+3 US politics,Fox News,World,https://moxie.foxnews.com/google-publisher/world.xml,2,med,likely,Right-leaning
+3 US politics,Fox News,Politics,https://moxie.foxnews.com/google-publisher/politics.xml,2,med,likely,Right-leaning
+3 US politics,The Atlantic,All,https://www.theatlantic.com/feed/all/,2,med,likely,
+3 US politics,National Review,All,https://www.nationalreview.com/feed/,2,med,likely,Right-leaning
+3 US politics,Roll Call,All,https://rollcall.com/feed/,2,med,likely,Extra. Congress coverage
+4 Middle East,Al Jazeera English,All,https://www.aljazeera.com/xml/rss/all.xml,1,high,tested,Valid. 25 items spanning about 6 hours
+4 Middle East,Middle East Eye,All,https://www.middleeasteye.net/rss,2,med,likely,
+4 Middle East,The National (UAE),All,https://www.thenationalnews.com/arc/outboundfeeds/rss/?outputType=xml,2,med,likely,
+4 Middle East,Haaretz,Headlines,https://www.haaretz.com/srv/haaretz-latest-headlines,2,med,guess,Israel. Left-leaning. Paywalled
+4 Middle East,Times of Israel,All,https://www.timesofisrael.com/feed/,1,high,likely,Israel. Centrist
+4 Middle East,Jerusalem Post,Headlines,https://www.jpost.com/rss/rssfeedsheadlines.aspx,2,med,likely,Extra. Israel. Centre-right
+4 Middle East,Al-Monitor,All,https://www.al-monitor.com/rss,2,med,likely,
+4 Middle East,Arab News,All,https://www.arabnews.com/rss.xml,2,med,likely,Saudi
+4 Middle East,Iran International,All,https://www.iranintl.com/en/rss,2,med,guess,Diaspora opposition view
+4 Middle East,Tehran Times,All,https://www.tehrantimes.com/rss,2,med,likely,Iranian state view
+5 Europe Russia Ukraine,Politico Europe,All,https://www.politico.eu/feed/,2,med,likely,
+5 Europe Russia Ukraine,Euronews,All,https://www.euronews.com/rss?format=mrss,1,high,likely,
+5 Europe Russia Ukraine,Kyiv Independent,News,https://kyivindependent.com/news-archive/rss/,2,med,tested,Valid. 15 items spanning about 1.6 days
+5 Europe Russia Ukraine,Ukrainska Pravda,English,https://www.pravda.com.ua/eng/rss/,2,med,likely,Extra
+5 Europe Russia Ukraine,Meduza,English,https://meduza.io/rss/en/all,2,med,likely,Independent Russian. In exile
+5 Europe Russia Ukraine,The Moscow Times,News,https://www.themoscowtimes.com/rss/news,2,med,likely,Extra. Independent Russian
+5 Europe Russia Ukraine,TASS,English,https://tass.com/rss/v2.xml,1,high,likely,Russian state view
+5 Europe Russia Ukraine,Le Monde,English,https://www.lemonde.fr/en/rss/une.xml,3,low,likely,
+5 Europe Russia Ukraine,Der Spiegel,International,https://www.spiegel.de/international/index.rss,3,low,likely,
+5 Europe Russia Ukraine,Institute for the Study of War,Updates,https://understandingwar.org/feed,4,low,guess,Daily battlefield assessments
+6 Asia-Pacific,Nikkei Asia,All,https://asia.nikkei.com/rss/feed/nar,2,med,likely,Partly paywalled
+6 Asia-Pacific,South China Morning Post,News,https://www.scmp.com/rss/91/feed,2,med,guess,Section IDs need checking
+6 Asia-Pacific,Xinhua,World,http://www.xinhuanet.com/english/rss/worldrss.xml,2,med,guess,Chinese state view
+6 Asia-Pacific,Global Times,All,https://www.globaltimes.cn/rss/outbrain.xml,2,med,guess,Chinese state view
+6 Asia-Pacific,The Diplomat,All,https://thediplomat.com/feed/,2,med,likely,
+6 Asia-Pacific,Yonhap,English,https://en.yna.co.kr/RSS/news.xml,2,med,likely,Korea
+6 Asia-Pacific,NK News,All,https://www.nknews.org/feed/,3,low,likely,
+6 Asia-Pacific,Japan Times,All,https://www.japantimes.co.jp/feed/,2,med,likely,
+6 Asia-Pacific,The Hindu,International,https://www.thehindu.com/news/international/feeder/default.rss,2,med,likely,India
+6 Asia-Pacific,Times of India,World,https://timesofindia.indiatimes.com/rssfeeds/296589292.cms,2,med,likely,India
+6 Asia-Pacific,Scroll,All,https://feeds.feedburner.com/ScrollinArticles.rss,3,low,guess,India
+6 Asia-Pacific,Dawn,Home,https://www.dawn.com/feeds/home,2,med,likely,Pakistan
+6 Asia-Pacific,Straits Times,World,https://www.straitstimes.com/news/world/rss.xml,2,med,likely,Singapore
+6 Asia-Pacific,Straits Times,Asia,https://www.straitstimes.com/news/asia/rss.xml,2,med,likely,
+6 Asia-Pacific,Jakarta Post,All,https://www.thejakartapost.com/rss,3,low,guess,
+6 Asia-Pacific,ABC Australia,Top stories,https://www.abc.net.au/news/feed/51120/rss.xml,2,med,likely,
+6 Asia-Pacific,Channel News Asia,Asia,https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml&category=6511,2,med,guess,Extra
+7 Africa,The Africa Report,All,https://www.theafricareport.com/feed/,3,low,likely,
+7 Africa,AllAfrica,Latest headlines,https://allafrica.com/tools/headlines/rdf/latest/headlines.rdf,1,high,likely,Aggregates hundreds of African outlets
+7 Africa,Daily Maverick,All,https://www.dailymaverick.co.za/dmrss/,2,med,likely,South Africa
+7 Africa,News24,Top stories,https://feeds.news24.com/articles/news24/TopStories/rss,2,med,likely,South Africa
+7 Africa,Premium Times,All,https://www.premiumtimesng.com/feed,2,med,likely,Nigeria
+7 Africa,Punch,All,https://punchng.com/feed/,2,med,likely,Nigeria
+7 Africa,The East African,All,https://www.theeastafrican.co.ke/tea/rss,3,low,guess,Kenya and region
+7 Africa,Nation Africa,All,https://nation.africa/kenya/rss.xml,3,low,guess,Kenya
+7 Africa,Mada Masr,English,https://www.madamasr.com/en/feed/,3,low,likely,Egypt. Independent
+7 Africa,Sudan Tribune,All,https://sudantribune.com/feed/,3,low,likely,
+8 Latin America,Americas Quarterly,All,https://www.americasquarterly.org/feed/,3,low,likely,
+8 Latin America,Buenos Aires Times,All,https://www.batimes.com.ar/feed,3,low,likely,
+8 Latin America,MercoPress,All,https://en.mercopress.com/rss,2,med,likely,
+8 Latin America,El Pais,English,https://english.elpais.com/rss/,3,low,guess,
+8 Latin America,Folha de S.Paulo,World,https://feeds.folha.uol.com.br/mundo/rss091.xml,2,med,likely,Portuguese
+8 Latin America,The Rio Times,All,https://www.riotimesonline.com/feed/,2,med,likely,
+8 Latin America,Mexico News Daily,All,https://mexiconewsdaily.com/feed/,2,med,likely,
+8 Latin America,InSight Crime,All,https://insightcrime.org/feed/,3,low,likely,
+9 Economy markets energy,CNBC,Top news,https://www.cnbc.com/id/100003114/device/rss/rss.html,1,high,likely,
+9 Economy markets energy,CNBC,World,https://www.cnbc.com/id/100727362/device/rss/rss.html,2,med,likely,
+9 Economy markets energy,CNBC,Finance,https://www.cnbc.com/id/10000664/device/rss/rss.html,2,med,likely,
+9 Economy markets energy,CNBC,Economy,https://www.cnbc.com/id/20910258/device/rss/rss.html,2,med,likely,
+9 Economy markets energy,MarketWatch,Top stories,https://feeds.content.dowjones.io/public/rss/mw_topstories,1,high,likely,Extra
+9 Economy markets energy,Barron's,All,https://www.barrons.com/xml/rss/3_7510.xml,2,med,guess,Paywalled
+9 Economy markets energy,OilPrice.com,Main,https://oilprice.com/rss/main,2,med,likely,
+9 Economy markets energy,Federal Reserve,Press releases,https://www.federalreserve.gov/feeds/press_all.xml,3,low,likely,Primary source
+9 Economy markets energy,European Central Bank,Press,https://www.ecb.europa.eu/rss/press.html,3,low,likely,Primary source
+9 Economy markets energy,Bank of England,News,https://www.bankofengland.co.uk/rss/news,3,low,likely,Extra. Primary source
+10 Geopolitics analysis,Foreign Affairs,All,https://www.foreignaffairs.com/rss.xml,4,low,likely,
+10 Geopolitics analysis,Foreign Policy,All,https://foreignpolicy.com/feed/,2,med,likely,
+10 Geopolitics analysis,War on the Rocks,All,https://warontherocks.com/feed/,3,low,likely,
+10 Geopolitics analysis,CSIS,Analysis,https://www.csis.org/analysis/feed,3,low,guess,
+10 Geopolitics analysis,Council on Foreign Relations,All,https://www.cfr.org/rss.xml,3,low,guess,
+10 Geopolitics analysis,Chatham House,Research,https://www.chathamhouse.org/rss/research,3,low,guess,
+10 Geopolitics analysis,International Crisis Group,All,https://www.crisisgroup.org/rss,3,low,guess,
+10 Geopolitics analysis,Carnegie Endowment,Publications,https://carnegieendowment.org/rss/solr/?fa=pubs,3,low,likely,
+10 Geopolitics analysis,Brookings,All,https://www.brookings.edu/feed/,3,low,likely,Extra
+11 Humanitarian,The New Humanitarian,All,https://www.thenewhumanitarian.org/rss.xml,3,low,guess,
+11 Humanitarian,UN News,All English,https://news.un.org/feed/subscribe/en/news/all/rss.xml,2,med,likely,
+11 Humanitarian,ReliefWeb,Updates,https://reliefweb.int/updates/rss.xml,1,high,likely,Primary source. High volume
+11 Humanitarian,Devex,News,https://www.devex.com/news/feed,3,low,guess,
+12 Fact-check & OSINT,Bellingcat,All,https://www.bellingcat.com/feed/,3,low,likely,
+12 Fact-check & OSINT,AP Fact Check (via Google News),AP Fact Check,https://news.google.com/rss/search?q=%22AP+Fact+Check%22+when:7d&hl=en-US&gl=US&ceid=US:en,4,low,guess,No public feed
+12 Fact-check & OSINT,Reuters Fact Check (via Google News),Reuters Fact Check,https://news.google.com/rss/search?q=%22Reuters+Fact+Check%22+when:7d&hl=en-US&gl=US&ceid=US:en,4,low,guess,No public feed
