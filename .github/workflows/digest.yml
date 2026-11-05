@@ -11,6 +11,10 @@ concurrency:
   group: data-branch
   cancel-in-progress: false
 
+env:
+  PYTHONUNBUFFERED: "1"
+  MAX_ENRICH_PER_RUN: "150"
+
 jobs:
   digest:
     runs-on: ubuntu-latest
@@ -27,6 +31,8 @@ jobs:
       - name: Collect any feeds that are due
         run: python -m collector.collect
       - name: Tag any untagged articles
+        timeout-minutes: 10          # leave most of the time for building the digest
+        continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
@@ -38,6 +44,7 @@ jobs:
           GEMINI_EMBED_MODEL: ${{ vars.GEMINI_EMBED_MODEL }}
         run: python -m collector.digest
       - name: Publish data branch
+        if: always()
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash scripts/publish_data.sh
