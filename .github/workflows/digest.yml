@@ -1,0 +1,43 @@
+name: digest
+on:
+  schedule:
+    - cron: "30 12 * * *"        # 12:30 UTC = 4:30am PST / 5:30am PDT, before the morning brief runs
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-branch
+  cancel-in-progress: false
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Load data branch
+        run: bash scripts/load_data.sh
+      - name: Collect any feeds that are due
+        run: python -m collector.collect
+      - name: Tag any untagged articles
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+        run: python -m collector.enrich
+      - name: Build digest
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+          GEMINI_EMBED_MODEL: ${{ vars.GEMINI_EMBED_MODEL }}
+        run: python -m collector.digest
+      - name: Publish data branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/publish_data.sh
