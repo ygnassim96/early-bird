@@ -1,0 +1,42 @@
+name: collect
+on:
+  schedule:
+    - cron: "7 * * * *"          # every hour; each feed is only fetched when its own tier is due
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Check every feed now, ignoring schedule"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: data-branch
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Load data branch
+        run: bash scripts/load_data.sh
+      - name: Collect feeds
+        run: python -m collector.collect ${{ inputs.force && '--force' || '' }}
+      - name: Fetch text and tag with Gemini
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+        run: python -m collector.enrich
+      - name: Publish data branch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/publish_data.sh
