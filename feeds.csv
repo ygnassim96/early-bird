@@ -156,3 +156,11 @@ category,outlet,feed,url,poll_tier,volume,confidence,notes
 12 Fact-check & OSINT,Bellingcat,All,https://www.bellingcat.com/feed/,3,low,likely,
 12 Fact-check & OSINT,AP Fact Check (via Google News),AP Fact Check,https://news.google.com/rss/search?q=%22AP+Fact+Check%22+when:7d&hl=en-US&gl=US&ceid=US:en,4,low,guess,No public feed
 12 Fact-check & OSINT,Reuters Fact Check (via Google News),Reuters Fact Check,https://news.google.com/rss/search?q=%22Reuters+Fact+Check%22+when:7d&hl=en-US&gl=US&ceid=US:en,4,low,guess,No public feed
+13 UK,BBC,UK,https://feeds.bbci.co.uk/news/uk/rss.xml,1,high,likely,
+13 UK,The Guardian,UK,https://www.theguardian.com/uk-news/rss,1,high,likely,
+13 UK,Sky News,UK,https://feeds.skynews.com/feeds/rss/uk.xml,2,high,guess,
+13 UK,The Independent,UK,https://www.independent.co.uk/news/uk/rss,2,high,guess,
+14 Egypt,Egypt Independent,All,https://www.egyptindependent.com/feed/,2,med,guess,
+14 Egypt,Egyptian Streets,All,https://egyptianstreets.com/feed/,2,med,guess,
+14 Egypt,Ahram Online (via Google News),site search last 24h,https://news.google.com/rss/search?q=site:english.ahram.org.eg+when:1d&hl=en-US&gl=US&ceid=US:en,2,med,likely,
+14 Egypt,Egypt (via Google News),Egypt last 24h,https://news.google.com/rss/search?q=Egypt+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,
