@@ -176,12 +176,26 @@ def run():
         list(pool.map(job, todo))
 
     total = 0
+    busy_streak = 0
     for i in range(0, len(todo), config.TAG_BATCH):
         batch = todo[i:i + config.TAG_BATCH]
+        k = i // config.TAG_BATCH + 1
+        t0 = time.time()
         try:
-            total += tag_batch(batch)
+            n = tag_batch(batch)
+            total += n
+            busy_streak = 0
+            print(f"batch {k}: tagged {n}/{len(batch)} with {gemini.last_model} in {time.time() - t0:.0f}s")
+        except gemini.GeminiBusy as e:
+            # Gemini overloaded: not the articles' fault, so don't count it against them.
+            busy_streak += 1
+            print(f"batch {k}: every model busy, left for the next run ({e})")
+            if busy_streak >= 3:
+                print("stopping early: Gemini is overloaded right now")
+                break
+            continue
         except gemini.GeminiError as e:
-            print(f"tagging batch failed: {e}")
+            print(f"batch {k} failed: {e}")
         for a in batch:
             if not a.get("tagged"):
                 a["tag_attempts"] = a.get("tag_attempts", 0) + 1
