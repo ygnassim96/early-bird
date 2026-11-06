@@ -18,7 +18,7 @@ concurrency:
 
 env:
   PYTHONUNBUFFERED: "1"          # print log lines as they happen
-  MAX_ENRICH_PER_RUN: "150"      # tag at most 150 articles per run
+  MAX_ENRICH_PER_RUN: "400"      # tag at most 400 articles per run
 
 jobs:
   collect:
