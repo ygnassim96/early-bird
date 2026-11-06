@@ -6,7 +6,7 @@ import re
 
 import numpy as np
 
-from . import config, gemini
+from . import brief_files, config, gemini
 from .collect import load_feeds
 from .util import iso, load_json, load_jsonl, parse_iso, save_json, utcnow
 
@@ -198,6 +198,10 @@ def run(now=None, embedder=None, summariser=None):
     save_json(config.DATA / "digest.json", digest)
     save_json(config.DATA / "feed_health.json", health)
     write_markdown(config.DATA / "digest_top.md", digest)
+    try:
+        brief_files.write(digest, clusters[: config.MAX_CLUSTERS], singles)
+    except Exception as e:  # never lose the main digest because of the split files
+        print(f"brief files failed: {type(e).__name__}: {e}")
     (config.DATA / ".nojekyll").write_text("")
     print(f"digest written: {len(out_clusters)} stories, {len(radar)} radar items")
     return digest
