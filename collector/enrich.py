@@ -10,7 +10,7 @@ from urllib.parse import urlsplit
 import requests
 
 from . import config, gemini
-from .util import domain_of, load_jsonl, save_jsonl
+from .util import domain_of, load_jsonl, save_json, save_jsonl, utcnow
 
 TOPICS = "politics | international | business | technology | health | science | environment | security | society | sports | culture | other"
 
@@ -78,14 +78,30 @@ def robots_allows(url: str) -> bool:
     return rp.can_fetch(config.UA_TOKEN, url)
 
 
+decode_stats = {"tried": 0, "decoded": 0, "failed": 0, "errors": []}
+_stats_lock = threading.Lock()
+
+
+def _note_decode(ok: bool, message: str = "") -> None:
+    with _stats_lock:
+        decode_stats["tried"] += 1
+        decode_stats["decoded" if ok else "failed"] += 1
+        if not ok and len(decode_stats["errors"]) < 5:
+            decode_stats["errors"].append(message[:200])
+
+
 def resolve_google(url: str):
+    """Turn a news.google.com link into the publisher's own URL.
+    googlenewsdecoder 0.2+ returns {"success": True, "decoded_url": ...}; 0.1.x used "status"."""
     try:
         from googlenewsdecoder import gnewsdecoder
         r = gnewsdecoder(url, interval=1)
-        if r.get("status"):
+        if (r.get("success") or r.get("status")) and r.get("decoded_url"):
+            _note_decode(True)
             return r["decoded_url"]
-    except Exception:
-        pass
+        _note_decode(False, str(r.get("message") or r.get("error") or r))
+    except Exception as e:
+        _note_decode(False, f"{type(e).__name__}: {e}")
     return None
 
 
@@ -174,6 +190,11 @@ def run():
 
     with ThreadPoolExecutor(max_workers=8) as pool:
         list(pool.map(job, todo))
+    if decode_stats["tried"]:
+        print(f"google news decode: {decode_stats['decoded']}/{decode_stats['tried']} decoded")
+        for m in decode_stats["errors"]:
+            print(f"  decode error: {m}")
+    save_json(config.DATA / "decode_stats.json", {"at": utcnow().isoformat(timespec="seconds"), **decode_stats})
 
     total = 0
     busy_streak = 0
