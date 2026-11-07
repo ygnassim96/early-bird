@@ -1,4 +1,4 @@
-category,outlet,feed,url,poll_tier,volume,confidence,notes
+category,outlet,feed,url,poll_tier,volume,confidence,notes,state_media
 1 Wires & aggregators,Reuters (via Google News),site search last 24h,https://news.google.com/rss/search?q=site:reuters.com+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,Reuters has no public RSS. Google News returns up to ~100 items
 1 Wires & aggregators,Reuters (via Google News),world last 24h,https://news.google.com/rss/search?q=site:reuters.com/world+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,
 1 Wires & aggregators,Reuters (via Google News),business last 24h,https://news.google.com/rss/search?q=site:reuters.com/business+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,
@@ -84,21 +84,21 @@ category,outlet,feed,url,poll_tier,volume,confidence,notes
 4 Middle East,Al-Monitor,All,https://www.al-monitor.com/rss,2,med,likely,
 4 Middle East,Arab News,All,https://www.arabnews.com/rss.xml,2,med,likely,Saudi
 4 Middle East,Iran International,All,https://www.iranintl.com/en/rss,2,med,guess,Diaspora opposition view
-4 Middle East,Tehran Times,All,https://www.tehrantimes.com/rss,2,med,likely,Iranian state view
+4 Middle East,Tehran Times,All,https://www.tehrantimes.com/rss,2,med,likely,Iranian state view,true
 5 Europe Russia Ukraine,Politico Europe,All,https://www.politico.eu/feed/,2,med,likely,
 5 Europe Russia Ukraine,Euronews,All,https://www.euronews.com/rss?format=mrss,1,high,likely,
 5 Europe Russia Ukraine,Kyiv Independent,News,https://kyivindependent.com/news-archive/rss/,2,med,tested,Valid. 15 items spanning about 1.6 days
 5 Europe Russia Ukraine,Ukrainska Pravda,English,https://www.pravda.com.ua/eng/rss/,2,med,likely,Extra
 5 Europe Russia Ukraine,Meduza,English,https://meduza.io/rss/en/all,2,med,likely,Independent Russian. In exile
 5 Europe Russia Ukraine,The Moscow Times,News,https://www.themoscowtimes.com/rss/news,2,med,likely,Extra. Independent Russian
-5 Europe Russia Ukraine,TASS,English,https://tass.com/rss/v2.xml,1,high,likely,Russian state view
+5 Europe Russia Ukraine,TASS,English,https://tass.com/rss/v2.xml,1,high,likely,Russian state view,true
 5 Europe Russia Ukraine,Le Monde,English,https://www.lemonde.fr/en/rss/une.xml,3,low,likely,
 5 Europe Russia Ukraine,Der Spiegel,International,https://www.spiegel.de/international/index.rss,3,low,likely,
 5 Europe Russia Ukraine,Institute for the Study of War,Updates,https://understandingwar.org/feed,4,low,guess,Daily battlefield assessments
 6 Asia-Pacific,Nikkei Asia,All,https://asia.nikkei.com/rss/feed/nar,2,med,likely,Partly paywalled
 6 Asia-Pacific,South China Morning Post,News,https://www.scmp.com/rss/91/feed,2,med,guess,Section IDs need checking
-6 Asia-Pacific,Xinhua,World,http://www.xinhuanet.com/english/rss/worldrss.xml,2,med,guess,Chinese state view
-6 Asia-Pacific,Global Times,All,https://www.globaltimes.cn/rss/outbrain.xml,2,med,guess,Chinese state view
+6 Asia-Pacific,Xinhua,World,http://www.xinhuanet.com/english/rss/worldrss.xml,2,med,guess,Chinese state view,true
+6 Asia-Pacific,Global Times,All,https://www.globaltimes.cn/rss/outbrain.xml,2,med,guess,Chinese state view,true
 6 Asia-Pacific,The Diplomat,All,https://thediplomat.com/feed/,2,med,likely,
 6 Asia-Pacific,Yonhap,English,https://en.yna.co.kr/RSS/news.xml,2,med,likely,Korea
 6 Asia-Pacific,NK News,All,https://www.nknews.org/feed/,3,low,likely,
@@ -162,5 +162,5 @@ category,outlet,feed,url,poll_tier,volume,confidence,notes
 13 UK,The Independent,UK,https://www.independent.co.uk/news/uk/rss,2,high,guess,
 14 Egypt,Egypt Independent,All,https://www.egyptindependent.com/feed/,2,med,guess,
 14 Egypt,Egyptian Streets,All,https://egyptianstreets.com/feed/,2,med,guess,
-14 Egypt,Ahram Online (via Google News),site search last 24h,https://news.google.com/rss/search?q=site:english.ahram.org.eg+when:1d&hl=en-US&gl=US&ceid=US:en,2,med,likely,
+14 Egypt,Ahram Online (via Google News),site search last 24h,https://news.google.com/rss/search?q=site:english.ahram.org.eg+when:1d&hl=en-US&gl=US&ceid=US:en,2,med,likely,,true
 14 Egypt,Egypt (via Google News),Egypt last 24h,https://news.google.com/rss/search?q=Egypt+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,
