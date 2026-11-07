@@ -1,5 +1,6 @@
 """Stage 2: fetch article text where allowed, then tag each new article with Gemini
 (topic, region, urgency, entities and a one-line summary), as Meridian does."""
+import csv
 import threading
 import time
 import urllib.robotparser
@@ -33,6 +34,25 @@ Fields:
 Articles:
 {articles}
 """
+
+
+def _load_state_media_outlets():
+    """Outlet names feeds.csv flags state_media=true, with the "(via Google News)"
+    suffix stripped: that's how Google News items end up labelled once collect.py
+    swaps in the publisher's own name from the RSS entry's <source> tag."""
+    names = set()
+    try:
+        with open(config.FEEDS_CSV, newline="", encoding="utf-8") as f:
+            for row in csv.DictReader(f):
+                if str(row.get("state_media", "")).strip().lower() == "true":
+                    outlet = row["outlet"].replace(" (via Google News)", "").strip()
+                    names.add(outlet)
+    except (FileNotFoundError, KeyError):
+        pass
+    return names
+
+
+STATE_MEDIA_OUTLETS = _load_state_media_outlets()
 
 
 class DomainGate:
@@ -158,7 +178,14 @@ def tag_batch(batch):
         a["geography"] = str(obj.get("geography", ""))[:40]
         a["scope"] = str(obj.get("scope", ""))[:30]
         a["urgency"] = str(obj.get("urgency", "routine")).lower()
-        a["source_type"] = str(obj.get("source_type", ""))[:30]
+        # Trust the feed list over Gemini's guess for outlets we already know
+        # are state-affiliated (TASS, Tehran Times, Xinhua, Global Times,
+        # Ahram Online): Gemini called these "mainstream" often enough that
+        # the brief's source-preference rule couldn't rely on the tag.
+        if a["outlet"] in STATE_MEDIA_OUTLETS:
+            a["source_type"] = "state-media"
+        else:
+            a["source_type"] = str(obj.get("source_type", ""))[:30]
         a["entities"] = [str(x)[:60] for x in (obj.get("entities") or [])][:5]
         a["tags"] = [str(x)[:40] for x in (obj.get("tags") or [])][:5]
         a["ai_summary"] = str(obj.get("summary", ""))[:300]
