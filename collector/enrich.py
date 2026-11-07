@@ -174,8 +174,6 @@ def run():
     todo = [a for a in articles if not a.get("tagged") and a.get("tag_attempts", 0) < 3]
     todo = todo[: config.MAX_ENRICH_PER_RUN]
     print(f"{len(todo)} articles to enrich")
-    if not todo:
-        return
 
     decode_budget = [config.MAX_GNEWS_DECODE_PER_RUN]
     lock = threading.Lock()
@@ -188,13 +186,41 @@ def run():
                 allow = True
         return prepare(a, allow)
 
-    with ThreadPoolExecutor(max_workers=8) as pool:
-        list(pool.map(job, todo))
+    if todo:
+        with ThreadPoolExecutor(max_workers=8) as pool:
+            list(pool.map(job, todo))
+
+    # Backfill: articles that were already tagged before the decoder fix
+    # (2026-11-07) and are still stuck with a dead news.google.com link. They
+    # don't need re-tagging, only a real URL and, where the publisher allows
+    # it, text. Spends whatever of this run's decode budget the pass above
+    # (which only covers newly-tagged articles) didn't use.
+    if decode_budget[0] > 0:
+        backlog = [
+            a for a in articles
+            if a.get("tagged") and "news.google.com" in a["url"] and not a.get("real_url")
+        ][: decode_budget[0]]
+        if backlog:
+            def backfill_job(a):
+                real = resolve_google(a["url"])
+                if real:
+                    a["real_url"] = real
+                    a["text"] = fetch_text(real)
+                return a
+
+            with ThreadPoolExecutor(max_workers=8) as pool:
+                list(pool.map(backfill_job, backlog))
+            print(f"backfilled {len(backlog)} already-tagged google news links")
+
     if decode_stats["tried"]:
         print(f"google news decode: {decode_stats['decoded']}/{decode_stats['tried']} decoded")
         for m in decode_stats["errors"]:
             print(f"  decode error: {m}")
     save_json(config.DATA / "decode_stats.json", {"at": utcnow().isoformat(timespec="seconds"), **decode_stats})
+    save_jsonl(path, articles)  # persist any backfill even if there's nothing left to tag
+
+    if not todo:
+        return
 
     total = 0
     busy_streak = 0
