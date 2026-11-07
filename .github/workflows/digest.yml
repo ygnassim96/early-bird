@@ -13,7 +13,7 @@ concurrency:
 
 env:
   PYTHONUNBUFFERED: "1"
-  MAX_ENRICH_PER_RUN: "150"
+  MAX_ENRICH_PER_RUN: "1500"
 
 jobs:
   digest:
@@ -31,7 +31,7 @@ jobs:
       - name: Collect any feeds that are due
         run: python -m collector.collect
       - name: Tag any untagged articles
-        timeout-minutes: 10          # leave most of the time for building the digest
+        timeout-minutes: 20          # leave most of the time for building the digest
         continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
