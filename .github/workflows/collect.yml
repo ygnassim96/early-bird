@@ -1,7 +1,7 @@
 name: collect
 on:
   schedule:
-    - cron: "7 * * * *"          # every hour; each feed is only fetched when its own tier is due
+    - cron: "23 * * * *"          # every hour; each feed is only fetched when its own tier is due
   workflow_dispatch:
     inputs:
       force:
@@ -18,7 +18,7 @@ concurrency:
 
 env:
   PYTHONUNBUFFERED: "1"          # print log lines as they happen
-  MAX_ENRICH_PER_RUN: "400"      # tag at most 400 articles per run
+  MAX_ENRICH_PER_RUN: "1200"      # tag at most 1200 articles per run
 
 jobs:
   collect:
