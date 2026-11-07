@@ -125,6 +125,66 @@ def resolve_google(url: str):
     return None
 
 
+browser_stats = {"tried": 0, "ok": 0, "failed": 0}
+_browser_lock = threading.Lock()
+_browser = None
+_playwright_ctx = None
+
+
+def _get_browser():
+    """Start a single headless Chromium instance, lazily, the first time it's
+    needed. Playwright's sync API isn't thread-safe, so every call that drives
+    it (including this one) must hold _browser_lock."""
+    global _browser, _playwright_ctx
+    if _browser is None:
+        from playwright.sync_api import sync_playwright
+        _playwright_ctx = sync_playwright().start()
+        _browser = _playwright_ctx.chromium.launch(headless=True)
+    return _browser
+
+
+def close_browser():
+    """Call once at the end of a run if a browser was ever started."""
+    global _browser, _playwright_ctx
+    with _browser_lock:
+        if _browser is not None:
+            try:
+                _browser.close()
+            except Exception:
+                pass
+            _browser = None
+        if _playwright_ctx is not None:
+            try:
+                _playwright_ctx.stop()
+            except Exception:
+                pass
+            _playwright_ctx = None
+
+
+def fetch_with_browser(url: str) -> str:
+    """Load a page in a real (headless) browser instead of a bare HTTP request.
+    Only called as a fallback, for a page robots.txt already allows us to fetch
+    but that returned a non-200 to a plain request -- typically a site blocking
+    non-browser traffic rather than a genuine access restriction. Calls are
+    serialized: this is a fallback for a handful of sites a day, not the normal
+    path, so one browser used one page at a time is plenty."""
+    with _browser_lock:
+        browser_stats["tried"] += 1
+        try:
+            browser = _get_browser()
+            page = browser.new_page(user_agent=config.UA)
+            try:
+                page.goto(url, timeout=20000, wait_until="domcontentloaded")
+                html = page.content()
+            finally:
+                page.close()
+            browser_stats["ok"] += 1
+            return html
+        except Exception:
+            browser_stats["failed"] += 1
+            return ""
+
+
 def fetch_text(url: str) -> str:
     """Return the first part of the article text, or '' if we may not or cannot fetch it."""
     import trafilatura
@@ -135,14 +195,22 @@ def fetch_text(url: str) -> str:
     if not robots_allows(url):
         return ""
     gate.wait(dom)
+    html = None
     try:
         r = requests.get(url, headers={"User-Agent": config.UA}, timeout=15)
-        if r.status_code != 200:
-            return ""
-        text = trafilatura.extract(r.text, include_comments=False, include_tables=False) or ""
-        return text[: config.TEXT_CHARS]
+        if r.status_code == 200:
+            html = r.text
+        elif r.status_code == 403:
+            # robots.txt allows this page, so a 403 here is almost always
+            # anti-bot filtering on request headers/fingerprint, not a real
+            # access restriction. Retry once with a real browser.
+            html = fetch_with_browser(url)
     except Exception:
+        pass
+    if not html:
         return ""
+    text = trafilatura.extract(html, include_comments=False, include_tables=False) or ""
+    return text[: config.TEXT_CHARS]
 
 
 def prepare(a, allow_decode: bool):
@@ -243,7 +311,10 @@ def run():
         print(f"google news decode: {decode_stats['decoded']}/{decode_stats['tried']} decoded")
         for m in decode_stats["errors"]:
             print(f"  decode error: {m}")
-    save_json(config.DATA / "decode_stats.json", {"at": utcnow().isoformat(timespec="seconds"), **decode_stats})
+    if browser_stats["tried"]:
+        print(f"browser fallback (403s): {browser_stats['ok']}/{browser_stats['tried']} succeeded")
+        close_browser()
+    save_json(config.DATA / "decode_stats.json", {"at": utcnow().isoformat(timespec="seconds"), **decode_stats, "browser": dict(browser_stats)})
     save_jsonl(path, articles)  # persist any backfill even if there's nothing left to tag
 
     if not todo:
