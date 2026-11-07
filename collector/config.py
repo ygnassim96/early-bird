@@ -30,7 +30,10 @@ EXCLUDE_TOPICS = set(
 )
 
 MAX_ENRICH_PER_RUN = int(os.environ.get("MAX_ENRICH_PER_RUN", "500"))
-MAX_GNEWS_DECODE_PER_RUN = int(os.environ.get("MAX_GNEWS_DECODE_PER_RUN", "150"))
+# Decoding is just an HTTP request per link, with no Gemini cost, so this can run
+# well ahead of the tag cap above: raised from 150 to clear the Google News backlog
+# left by the decoder bug (fixed 2026-11-07) within a few runs instead of a day.
+MAX_GNEWS_DECODE_PER_RUN = int(os.environ.get("MAX_GNEWS_DECODE_PER_RUN", "800"))
 TAG_BATCH = int(os.environ.get("TAG_BATCH", "12"))
 TEXT_CHARS = int(os.environ.get("TEXT_CHARS", "1000"))
 
