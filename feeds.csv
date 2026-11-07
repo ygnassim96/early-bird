@@ -85,6 +85,7 @@ category,outlet,feed,url,poll_tier,volume,confidence,notes,state_media
 4 Middle East,Arab News,All,https://www.arabnews.com/rss.xml,2,med,likely,Saudi
 4 Middle East,Iran International,All,https://www.iranintl.com/en/rss,2,med,guess,Diaspora opposition view
 4 Middle East,Tehran Times,All,https://www.tehrantimes.com/rss,2,med,likely,Iranian state view,true
+4 Middle East,The New Arab,All,https://www.newarab.com/rss,2,med,likely,London-based pan-Arab. Independent
 5 Europe Russia Ukraine,Politico Europe,All,https://www.politico.eu/feed/,2,med,likely,
 5 Europe Russia Ukraine,Euronews,All,https://www.euronews.com/rss?format=mrss,1,high,likely,
 5 Europe Russia Ukraine,Kyiv Independent,News,https://kyivindependent.com/news-archive/rss/,2,med,tested,Valid. 15 items spanning about 1.6 days
@@ -120,7 +121,7 @@ category,outlet,feed,url,poll_tier,volume,confidence,notes,state_media
 7 Africa,Punch,All,https://punchng.com/feed/,2,med,likely,Nigeria
 7 Africa,The East African,All,https://www.theeastafrican.co.ke/tea/rss,3,low,guess,Kenya and region
 7 Africa,Nation Africa,All,https://nation.africa/kenya/rss.xml,3,low,guess,Kenya
-7 Africa,Mada Masr,English,https://www.madamasr.com/en/feed/,3,low,likely,Egypt. Independent
+7 Africa,Mada Masr,English,https://www.madamasr.com/en/feed/,3,low,likely,Egypt. Independent. Shut down by court order 27 Oct 2026; feed kept in case it resumes
 7 Africa,Sudan Tribune,All,https://sudantribune.com/feed/,3,low,likely,
 8 Latin America,Americas Quarterly,All,https://www.americasquarterly.org/feed/,3,low,likely,
 8 Latin America,Buenos Aires Times,All,https://www.batimes.com.ar/feed,3,low,likely,
@@ -160,7 +161,12 @@ category,outlet,feed,url,poll_tier,volume,confidence,notes,state_media
 13 UK,The Guardian,UK,https://www.theguardian.com/uk-news/rss,1,high,likely,
 13 UK,Sky News,UK,https://feeds.skynews.com/feeds/rss/uk.xml,2,high,guess,
 13 UK,The Independent,UK,https://www.independent.co.uk/news/uk/rss,2,high,guess,
+13 UK,The Telegraph,All,https://www.telegraph.co.uk/rss.xml,2,high,likely,Right-leaning. Paywalled
+13 UK,Daily Mail,News,http://www.dailymail.co.uk/news/index.rss,2,high,likely,Right-leaning. Populist/tabloid
 14 Egypt,Egypt Independent,All,https://www.egyptindependent.com/feed/,2,med,guess,
 14 Egypt,Egyptian Streets,All,https://egyptianstreets.com/feed/,2,med,guess,
+14 Egypt,Al-Masry Al-Youm,RSS,http://www.almasryalyoum.com/rss/rssfeeds,2,med,likely,Arabic. Independent-leaning daily
+14 Egypt,Al-Destour,RSS,https://www.dostor.org/rss.aspx,3,low,guess,Arabic. Independent/opposition-leaning
 14 Egypt,Ahram Online (via Google News),site search last 24h,https://news.google.com/rss/search?q=site:english.ahram.org.eg+when:1d&hl=en-US&gl=US&ceid=US:en,2,med,likely,,true
 14 Egypt,Egypt (via Google News),Egypt last 24h,https://news.google.com/rss/search?q=Egypt+when:1d&hl=en-US&gl=US&ceid=US:en,1,high,likely,
+14 Egypt,Al Jazeera (via Google News),Egypt site search last 24h,https://news.google.com/rss/search?q=site:aljazeera.com+Egypt+when:1d&hl=en-US&gl=US&ceid=US:en,2,med,likely,Egypt-specific slice of AJ's general coverage
