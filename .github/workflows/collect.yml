@@ -31,6 +31,7 @@ jobs:
           python-version: "3.11"
           cache: pip
       - run: pip install -r requirements.txt
+      - run: playwright install chromium --with-deps
       - name: Load data branch
         run: bash scripts/load_data.sh
       - name: Collect feeds
