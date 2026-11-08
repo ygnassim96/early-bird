@@ -10,10 +10,15 @@ from . import brief_files, config, gemini
 from .collect import load_feeds
 from .util import iso, load_json, load_jsonl, parse_iso, save_json, utcnow
 
+# Read real article text, not just the one-sentence tag summary, so the cluster
+# synthesis actually draws on what the decoder/browser-fallback fixes (2026-11-07)
+# now give us: full text for a majority of articles instead of a 30-word stub.
 SUMMARY_PROMPT = """You are an intelligence analyst. The items below come from different outlets and appear to cover the same story.
+Each item includes as much of the article's actual text as was available -- read it, don't just skim the headlines.
 Return one JSON object with these fields and nothing else:
 - headline: neutral factual headline, at most 14 words
-- summary: 2 to 3 sentences with the concrete facts (who, what, numbers). Use only what is in the items below.
+- summary: 3 to 5 sentences with the concrete facts (who, what, numbers, when, where). Draw on the article text, not just the headlines. Use only what is in the items below -- never invent a fact, figure or quote.
+- key_facts: 3 to 6 short strings, each a single specific fact, figure, or named detail pulled from the article text that a summary this short would otherwise drop (an exact number, a direct quote, a date, a named official's statement). Skip this field (empty array) if the items don't have enough real text to support it.
 - region: e.g. "United States", "Middle East", "Europe", "Asia-Pacific", "Africa", "Latin America", "Global"
 - topic: one of politics, international, business, technology, health, science, environment, security, society
 - coherent: true if all items are about the same event, false if they are mixed
@@ -68,10 +73,24 @@ def member_view(a):
     }
 
 
+def _item_text(m, chars=700):
+    """The best material we have for this article: real extracted text if we
+    have it (now common, post decoder/browser-fallback fixes), else fall back
+    to the short tag-time summary for articles that are genuinely paywalled
+    or otherwise textless."""
+    text = (m.get("text") or "").strip()
+    if text:
+        return text[:chars]
+    return m.get("ai_summary") or m.get("summary", "")
+
+
 def summarise(members):
-    items = "\n".join(
-        f"- [{m['outlet']}{' (' + m['note'] + ')' if m.get('note') else ''}] {m['title']} — {m.get('ai_summary') or m.get('summary', '')}"
-        for m in members[:12]
+    # Fewer members than before (8 instead of 12), but each with real article
+    # text rather than one tag-time sentence -- more actual reporting reaches
+    # the model, not more items.
+    items = "\n\n".join(
+        f"[{m['outlet']}{' (' + m['note'] + ')' if m.get('note') else ''}] {m['title']}\n{_item_text(m)}"
+        for m in members[:8]
     )
     return gemini.generate_json(SUMMARY_PROMPT.format(items=items))
 
@@ -120,6 +139,8 @@ def write_markdown(path, digest):
         lines.append(f"{c['n_articles']} articles from {c['n_outlets']} outlets: {', '.join(c['outlets'][:8])}")
         lines.append("")
         lines.append(c["summary"])
+        for kf in c.get("key_facts", []):
+            lines.append(f"- {kf}")
         if c.get("outlet_disagreement"):
             lines.append(f"Framing: {c['outlet_disagreement']}")
         for a in c["articles"][:4]:
@@ -157,6 +178,7 @@ def run(now=None, embedder=None, summariser=None):
     for rank, c in enumerate(clusters[: config.MAX_CLUSTERS]):
         members = c["members"]
         info = {"headline": members[0]["title"], "summary": members[0].get("ai_summary", ""),
+                "key_facts": [],
                 "region": members[0].get("geography", ""), "topic": members[0].get("topic", ""),
                 "coherent": True, "outlet_disagreement": ""}
         if rank < config.SUMMARISE_TOP:
