@@ -84,7 +84,8 @@ def _cut(s, n):
 def compact_cluster(c, members=None):
     arts = members if members is not None else c.get("articles", [])
     return {
-        "rank": c["rank"], "headline": c["headline"], "summary": _cut(c.get("summary"), 420),
+        "rank": c["rank"], "headline": c["headline"], "summary": _cut(c.get("summary"), 700),
+        "key_facts": [_cut(k, 180) for k in (c.get("key_facts") or [])][:5],
         "region": c.get("region", ""), "topic": c.get("topic", ""), "coherent": c.get("coherent", True),
         "outlet_disagreement": _cut(c.get("outlet_disagreement"), 300),
         "n_articles": c["n_articles"], "n_outlets": c["n_outlets"], "outlets": c.get("outlets", [])[:6],
@@ -186,7 +187,9 @@ def write(digest, clusters, singles):
         "generated_at": digest["generated_at"], "window_hours": digest.get("window_hours"),
         "stats": digest["stats"],
         "how_to_read": "Fetch each file listed below; each is small enough to read in full. Clusters are stories "
-                       "covered by several outlets, ranked best first (rank is the overall rank). Singles are "
+                       "covered by several outlets, ranked best first (rank is the overall rank). Each cluster's "
+                       "key_facts are specific details (figures, quotes, dates) pulled from the member articles' "
+                       "own text, worth using over re-deriving the same facts from the summary. Singles are "
                        "stories from one outlet. A story can appear in more than one file.",
         "files": index_files,
     }
