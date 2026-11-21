@@ -1,0 +1,14 @@
+{
+ "at": "2026-11-21T16:01:26+00:00",
+ "tried": 30,
+ "decoded": 29,
+ "failed": 1,
+ "errors": [
+  "Failed to fetch data attributes from Google News."
+ ],
+ "browser": {
+  "tried": 11,
+  "ok": 3,
+  "failed": 8
+ }
+}
